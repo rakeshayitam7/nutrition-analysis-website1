@@ -1063,7 +1063,7 @@ function showFoodResult(
 
         <div class="micro-grid">
 
-            ${createMicroCards(vitamins)}
+            ${createMicroCards(vitamins, "vitamin")}
 
         </div>
 
@@ -1075,7 +1075,7 @@ function showFoodResult(
 
         <div class="micro-grid">
 
-            ${createMicroCards(minerals)}
+            ${createMicroCards(minerals, "mineral")}
 
         </div>
 
@@ -1088,7 +1088,18 @@ function showFoodResult(
 // MICRO CARDS
 // =====================================================
 
-function createMicroCards(data) {
+function createMicroCards(data, category) {
+
+    const vitaminUnits = {
+        "Vitamin A": "mcg",
+        "Vitamin D": "mcg",
+        "Vitamin K": "mcg",
+        "Vitamin B12": "mcg"
+    };
+
+    const mineralUnits = {
+        Selenium: "mcg"
+    };
 
     return Object.entries(data)
 
@@ -1103,6 +1114,9 @@ function createMicroCards(data) {
 
                     <strong>
                         ${value.toFixed(2)}
+                        ${category === "vitamin"
+                            ? (vitaminUnits[name] || "mg")
+                            : (mineralUnits[name] || "mg")}
                     </strong>
 
                 </div>
