@@ -137,112 +137,68 @@
 			});
 		});
 	</script>
-</body>
-<!-- =====================================================
-     ❤️ DONATION FEATURE
-===================================================== -->
+	<!-- ================= DONATION BUTTON ================= -->
 
-<!-- SMALL FIXED DONATION BUTTON -->
-<button class="donation-btn" onclick="openDonation()">
-    <span class="donation-heart">♥</span>
-    Donation
+<button id="topDonationButton" type="button">
+    ♥ Donation
 </button>
 
 
-<!-- DONATION POPUP -->
-<div id="donationModal" class="donation-modal">
+<!-- ================= DONATION POPUP ================= -->
 
-    <div class="donation-card">
+<div id="topDonationModal">
 
-        <!-- CLOSE BUTTON -->
-        <button
-            class="donation-close"
-            onclick="closeDonation()">
+    <div id="topDonationCard">
+
+        <button id="topDonationClose" type="button">
             ×
         </button>
 
-
-        <!-- DONATION ICON -->
-        <div class="donation-icon">
+        <div class="donation-leaf">
             🌱
         </div>
 
-
-        <!-- TITLE -->
         <h2>Support This Project ❤️</h2>
 
-
-        <!-- DESCRIPTION -->
-        <p class="donation-intro">
-            If you find this Nutrient Analysis tool useful,
-            your small support helps me keep improving the
-            project and adding more useful nutrition features.
+        <p class="donation-description">
+            If you find this Nutrient Analysis website useful,
+            you can support the project with a small donation.
         </p>
 
+        <div class="donation-qr-box">
 
-        <!-- QR SECTION -->
-        <div class="qr-container">
-
-            <div class="qr-title">
+            <div class="donation-scan-title">
                 📱 Scan to Donate
             </div>
 
             <img
                 src="upi-qr.png"
                 alt="UPI Donation QR Code"
-                class="upi-qr"
+                id="donationQR"
             >
 
-            <div class="scan-text">
-                Scan with Google Pay, PhonePe, Paytm
-                or your preferred UPI app.
-            </div>
+            <p class="donation-scan-text">
+                Scan using Google Pay, PhonePe, Paytm
+                or any UPI app.
+            </p>
 
         </div>
 
+        <div class="donation-upi-box">
 
-        <!-- UPI DETAILS -->
-        <div class="upi-section">
-
-            <div class="upi-label">
+            <div class="donation-upi-label">
                 UPI ID
             </div>
 
-            <div class="upi-id-row">
-
-                <span id="upiDonationId">
-                    rakeshayitam61@oksbi
-                </span>
-
-                <button
-                    class="copy-upi-btn"
-                    onclick="copyUPI()">
-                    Copy
-                </button>
-
-            </div>
-
-            <div
-                id="copyMessage"
-                class="copy-message">
-                UPI ID copied ✓
+            <div class="donation-upi-id">
+                rakeshayitam61@oksbi
             </div>
 
         </div>
 
-
-        <!-- THANK YOU -->
-        <div class="thank-you">
-
-            🌿 Every contribution helps this project grow.
-
-            <br>
-
-            <strong>
-                Thank you for your support!
-            </strong>
-
-        </div>
+        <p class="donation-thankyou">
+            🌿 Thank you for supporting this project!
+        </p>
 
     </div>
 
@@ -252,60 +208,70 @@
 <style>
 
 /* =====================================================
-   SMALL FIXED DONATION BUTTON
+   SMALL FIXED TOP-RIGHT DONATION ICON
 ===================================================== */
 
-.donation-btn {
+#topDonationButton {
 
-    position: fixed;
+    position: fixed !important;
 
-    top: 12px;
-    right: 15px;
+    top: 12px !important;
+    right: 12px !important;
 
-    z-index: 9998;
+    width: auto !important;
+    height: auto !important;
 
-    display: flex;
+    min-width: 0 !important;
+    max-width: none !important;
 
-    align-items: center;
+    padding: 7px 11px !important;
 
-    gap: 5px;
+    margin: 0 !important;
 
-    padding: 7px 12px;
+    display: inline-flex !important;
 
-    border: none;
+    align-items: center !important;
+    justify-content: center !important;
 
-    border-radius: 20px;
+    gap: 4px !important;
 
-    background: #15803d;
+    background: #15803d !important;
 
-    color: white;
+    color: #ffffff !important;
 
-    font-size: 12px;
+    border: none !important;
 
-    font-weight: 700;
+    border-radius: 18px !important;
 
-    cursor: pointer;
+    font-family: inherit !important;
+
+    font-size: 12px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1 !important;
+
+    white-space: nowrap !important;
+
+    cursor: pointer !important;
+
+    z-index: 999999 !important;
 
     box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.18);
+        0 3px 10px rgba(0,0,0,0.20) !important;
 
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
+    transform: none !important;
 }
 
 
-.donation-btn:hover {
+/* BUTTON HOVER */
 
-    transform: translateY(-1px);
+#topDonationButton:hover {
 
-    background: #166534;
-}
+    background: #166534 !important;
 
+    transform: translateY(-1px) !important;
 
-.donation-heart {
-
-    font-size: 14px;
 }
 
 
@@ -313,7 +279,7 @@
    POPUP BACKGROUND
 ===================================================== */
 
-.donation-modal {
+#topDonationModal {
 
     display: none;
 
@@ -321,18 +287,22 @@
 
     inset: 0;
 
-    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
 
-    padding: 20px;
+    background: rgba(0, 0, 0, 0.72);
 
-    background:
-        rgba(10, 30, 18, 0.72);
+    backdrop-filter: blur(5px);
 
-    backdrop-filter: blur(7px);
+    z-index: 1000000;
+
+    align-items: center;
 
     justify-content: center;
 
-    align-items: center;
+    padding: 15px;
+
+    box-sizing: border-box;
 }
 
 
@@ -340,62 +310,31 @@
    DONATION CARD
 ===================================================== */
 
-.donation-card {
+#topDonationCard {
 
     position: relative;
 
     width: 100%;
 
-    max-width: 430px;
+    max-width: 420px;
 
     max-height: 92vh;
 
     overflow-y: auto;
 
-    padding: 30px 28px;
-
     box-sizing: border-box;
 
-    border-radius: 28px;
+    padding: 25px 20px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
 
     text-align: center;
 
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff 0%,
-            #f7fff9 100%
-        );
-
     box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.30);
+        0 20px 60px rgba(0,0,0,0.30);
 
-    animation:
-        donationAppear 0.3s ease;
-}
-
-
-/* POPUP ANIMATION */
-
-@keyframes donationAppear {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(20px)
-            scale(0.96);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
 }
 
 
@@ -403,41 +342,36 @@
    CLOSE BUTTON
 ===================================================== */
 
-.donation-close {
+#topDonationClose {
 
-    position: absolute;
+    position: absolute !important;
 
-    top: 13px;
+    top: 10px !important;
+    right: 12px !important;
 
-    right: 16px;
+    width: 32px !important;
+    height: 32px !important;
 
-    width: 34px;
+    min-width: 32px !important;
 
-    height: 34px;
+    padding: 0 !important;
 
-    border: none;
+    margin: 0 !important;
 
-    border-radius: 50%;
+    border: none !important;
 
-    background: #f1f5f2;
+    border-radius: 50% !important;
 
-    color: #374151;
+    background: #f1f5f2 !important;
 
-    font-size: 24px;
+    color: #374151 !important;
 
-    line-height: 30px;
+    font-size: 23px !important;
 
-    cursor: pointer;
+    line-height: 32px !important;
 
-    transition: 0.2s;
-}
+    cursor: pointer !important;
 
-
-.donation-close:hover {
-
-    background: #dcfce7;
-
-    color: #166534;
 }
 
 
@@ -445,14 +379,13 @@
    DONATION ICON
 ===================================================== */
 
-.donation-icon {
+.donation-leaf {
 
-    width: 62px;
+    width: 55px;
 
-    height: 62px;
+    height: 55px;
 
-    margin:
-        0 auto 12px;
+    margin: 0 auto 10px;
 
     display: flex;
 
@@ -462,18 +395,10 @@
 
     border-radius: 50%;
 
-    background:
-        linear-gradient(
-            135deg,
-            #dcfce7,
-            #bbf7d0
-        );
+    background: #dcfce7;
 
-    font-size: 30px;
+    font-size: 27px;
 
-    box-shadow:
-        0 8px 20px
-        rgba(34, 197, 94, 0.18);
 }
 
 
@@ -481,16 +406,16 @@
    HEADING
 ===================================================== */
 
-.donation-card h2 {
+#topDonationCard h2 {
 
-    margin:
-        5px 0 10px;
+    margin: 5px 0 10px;
 
     color: #14532d;
 
-    font-size: 25px;
+    font-size: 23px;
 
-    font-weight: 800;
+    line-height: 1.2;
+
 }
 
 
@@ -498,53 +423,50 @@
    DESCRIPTION
 ===================================================== */
 
-.donation-intro {
+.donation-description {
 
-    margin:
-        0 auto 20px;
+    margin: 0 auto 18px;
 
-    max-width: 350px;
+    max-width: 340px;
 
-    color: #52615a;
+    color: #64748b;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    line-height: 1.6;
+    line-height: 1.55;
+
 }
 
 
 /* =====================================================
-   QR CONTAINER
+   QR BOX
 ===================================================== */
 
-.qr-container {
+.donation-qr-box {
 
-    padding: 18px;
+    padding: 14px;
 
-    border-radius: 20px;
+    background: #f8fff9;
 
-    background: white;
+    border: 1px solid #dcfce7;
 
-    border:
-        1px solid #dcfce7;
+    border-radius: 18px;
 
-    box-shadow:
-        0 8px 25px
-        rgba(22, 101, 52, 0.08);
 }
 
 
 /* QR TITLE */
 
-.qr-title {
+.donation-scan-title {
 
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 
     color: #166534;
 
-    font-size: 16px;
+    font-size: 15px;
 
-    font-weight: 800;
+    font-weight: 700;
+
 }
 
 
@@ -552,98 +474,79 @@
    QR IMAGE
 ===================================================== */
 
-.upi-qr {
-
-    width: 300px;
-
-    height: 300px;
-
-    max-width: 100%;
+#donationQR {
 
     display: block;
 
-    margin:
-        10px auto 12px;
+    width: 280px;
+
+    height: 280px;
+
+    max-width: 100%;
+
+    margin: 8px auto;
 
     object-fit: contain;
+
 }
 
 
 /* SCAN TEXT */
 
-.scan-text {
+.donation-scan-text {
+
+    margin: 7px 0 0;
 
     color: #64748b;
 
-    font-size: 12px;
+    font-size: 11px;
 
-    line-height: 1.5;
+    line-height: 1.4;
+
 }
 
 
 /* =====================================================
-   UPI SECTION
+   UPI BOX
 ===================================================== */
 
-.upi-section {
+.donation-upi-box {
 
-    margin-top: 17px;
+    margin-top: 14px;
 
-    padding: 15px;
-
-    border-radius: 16px;
+    padding: 12px;
 
     background: #f0fdf4;
 
-    border:
-        1px solid #bbf7d0;
+    border: 1px solid #bbf7d0;
+
+    border-radius: 12px;
+
 }
 
 
 /* UPI LABEL */
 
-.upi-label {
+.donation-upi-label {
 
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 
     color: #166534;
 
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: 700;
 
     text-transform: uppercase;
 
-    letter-spacing: 0.7px;
-}
+    letter-spacing: 0.5px;
 
-
-/* UPI ROW */
-
-.upi-id-row {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 8px;
-
-    padding: 9px 10px;
-
-    background: white;
-
-    border-radius: 10px;
-
-    border:
-        1px solid #d1fae5;
 }
 
 
 /* UPI ID */
 
-#upiDonationId {
+.donation-upi-id {
 
     color: #17251d;
 
@@ -653,84 +556,19 @@
 
     word-break: break-all;
 
-    text-align: left;
 }
 
 
-/* COPY BUTTON */
+/* THANK YOU */
 
-.copy-upi-btn {
+.donation-thankyou {
 
-    flex-shrink: 0;
-
-    padding:
-        7px 11px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #166534;
-
-    color: white;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-
-.copy-upi-btn:hover {
-
-    background: #15803d;
-}
-
-
-/* COPY MESSAGE */
-
-.copy-message {
-
-    display: none;
-
-    margin-top: 7px;
-
-    color: #15803d;
-
-    font-size: 12px;
-
-    font-weight: 600;
-}
-
-
-/* =====================================================
-   THANK YOU
-===================================================== */
-
-.thank-you {
-
-    margin-top: 18px;
-
-    padding: 13px;
-
-    border-radius: 14px;
-
-    background: #ecfdf5;
+    margin: 14px 0 0;
 
     color: #527060;
 
     font-size: 12px;
 
-    line-height: 1.6;
-}
-
-
-.thank-you strong {
-
-    color: #166534;
 }
 
 
@@ -740,84 +578,63 @@
 
 @media (max-width: 480px) {
 
-    .donation-btn {
+    #topDonationButton {
 
-        top: 8px;
+        top: 8px !important;
+        right: 8px !important;
 
-        right: 8px;
+        padding: 6px 9px !important;
 
-        padding:
-            6px 10px;
+        font-size: 11px !important;
 
-        font-size: 11px;
+        border-radius: 16px !important;
 
-        border-radius: 18px;
     }
 
 
-    .donation-heart {
+    #topDonationCard {
 
-        font-size: 13px;
+        max-width: 360px;
+
+        padding: 22px 15px;
+
+        border-radius: 20px;
+
     }
 
 
-    .donation-card {
+    #donationQR {
 
-        padding:
-            25px 18px;
+        width: 250px;
 
-        border-radius: 22px;
-    }
+        height: 250px;
 
-
-    .donation-card h2 {
-
-        font-size: 22px;
-    }
-
-
-    .upi-qr {
-
-        width: 260px;
-
-        height: 260px;
-    }
-
-
-    .upi-id-row {
-
-        align-items: center;
-    }
-
-
-    #upiDonationId {
-
-        font-size: 12px;
     }
 
 }
 
 
 /* =====================================================
-   VERY SMALL PHONES
+   VERY SMALL MOBILE
 ===================================================== */
 
 @media (max-width: 350px) {
 
-    .donation-btn {
+    #topDonationButton {
 
-        padding:
-            5px 9px;
+        padding: 5px 8px !important;
 
-        font-size: 10px;
+        font-size: 10px !important;
+
     }
 
 
-    .upi-qr {
+    #donationQR {
 
-        width: 230px;
+        width: 220px;
 
-        height: 230px;
+        height: 220px;
+
     }
 
 }
@@ -828,29 +645,33 @@
 <script>
 
 /* =====================================================
-   OPEN DONATION
+   OPEN POPUP
 ===================================================== */
 
-function openDonation() {
+document
+    .getElementById("topDonationButton")
+    .addEventListener("click", function () {
 
-    document
-        .getElementById("donationModal")
-        .style.display = "flex";
+        document
+            .getElementById("topDonationModal")
+            .style.display = "flex";
 
-}
+    });
 
 
 /* =====================================================
-   CLOSE DONATION
+   CLOSE POPUP
 ===================================================== */
 
-function closeDonation() {
+document
+    .getElementById("topDonationClose")
+    .addEventListener("click", function () {
 
-    document
-        .getElementById("donationModal")
-        .style.display = "none";
+        document
+            .getElementById("topDonationModal")
+            .style.display = "none";
 
-}
+    });
 
 
 /* =====================================================
@@ -858,56 +679,20 @@ function closeDonation() {
 ===================================================== */
 
 document
-    .getElementById("donationModal")
-    .addEventListener(
-        "click",
-        function(event) {
+    .getElementById("topDonationModal")
+    .addEventListener("click", function (event) {
 
-            if (event.target === this) {
+        if (event.target === this) {
 
-                closeDonation();
-
-            }
+            this.style.display = "none";
 
         }
-    );
 
-
-/* =====================================================
-   COPY UPI ID
-===================================================== */
-
-function copyUPI() {
-
-    const upiId =
-        document
-            .getElementById("upiDonationId")
-            .innerText;
-
-    navigator.clipboard
-        .writeText(upiId)
-        .then(function() {
-
-            const message =
-                document
-                    .getElementById("copyMessage");
-
-            message.style.display = "block";
-
-            setTimeout(function() {
-
-                message.style.display = "none";
-
-            }, 2000);
-
-        });
-
-}
+    });
 
 </script>
 
-<!-- =====================================================
-     END DONATION FEATURE
-===================================================== -->
+<!-- ================= END DONATION ================= -->
+</body>
 </script>
 </html>
