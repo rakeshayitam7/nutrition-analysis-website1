@@ -1,418 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>GymFood AI - Nutrition Calculator</title>
-
-    <link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="FoodNutrient nutrition analyzer for calories, macros, vitamins and minerals.">
+	<title>FoodNutrient | Food Analyzer</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-<header>
-
-    <div class="nav">
-
-        <div class="logo">
-            🥗 GymFood
-        </div>
-
-        <span class="badge">
-            Nutrition Analyzer
-        </span>
-
-    </div>
-
-    <div class="hero">
-
-        <h1>
-            Know Your Food.
-            <span>Build Your Body.</span>
-        </h1>
-
-        <p>
-            Calculate protein, calories, carbs, fats,
-            vitamins and minerals for your food.
-        </p>
-
-    </div>
-
-</header>
-
-
-<main>
-
-
-    <!-- FOOD CALCULATOR -->
-
-    <section class="card">
-
-        <div class="section-heading">
-
-            <div>
-                <span class="section-number">01</span>
-
-                <h2>
-                    Food Nutrition Calculator
-                </h2>
-
-                <p>
-                    Select a food and calculate its nutrition
-                    for any quantity.
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="form-grid">
-
-            <div class="input-group">
-
-                <label>
-                    Food
-                </label>
-
-                <input
-                    type="text"
-                    id="foodInput"
-                    list="foodList"
-                    placeholder="Example: carrot, rice, egg, chicken..."
-                >
-
-                <datalist id="foodList">
-
-                    <option value="Carrot">
-                    <option value="Rice">
-                    <option value="Cooked Rice">
-                    <option value="Egg">
-                    <option value="Chicken Breast">
-                    <option value="Potato">
-                    <option value="Cooked Potato">
-                    <option value="Oats">
-                    <option value="Milk">
-                    <option value="Banana">
-                    <option value="Apple">
-                    <option value="Paneer">
-                    <option value="Dal">
-                    <option value="Peanuts">
-                    <option value="Almonds">
-                    <option value="Broccoli">
-                    <option value="Spinach">
-
-                </datalist>
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Food State
-                </label>
-
-                <select id="foodState">
-
-                    <option value="raw">
-                        Raw
-                    </option>
-
-                    <option value="cooked">
-                        Cooked
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Quantity
-                </label>
-
-                <input
-                    type="number"
-                    id="foodWeight"
-                    value="100"
-                    min="1"
-                    placeholder="100"
-                >
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Unit
-                </label>
-
-                <select id="foodUnit">
-
-                    <option value="g">
-                        Grams (g)
-                    </option>
-
-                    <option value="kg">
-                        Kilograms (kg)
-                    </option>
-
-                </select>
-
-            </div>
-
-        </div>
-
-
-        <button
-            class="primary-btn"
-            onclick="calculateFood()">
-
-            Calculate Nutrition
-
-        </button>
-
-
-        <div
-            id="foodResult"
-            class="result hidden">
-
-        </div>
-
-    </section>
-
-
-
-    <!-- LABEL ANALYZER -->
-
-    <section class="card">
-
-        <div class="section-heading">
-
-            <div>
-
-                <span class="section-number">
-                    02
-                </span>
-
-                <h2>
-                    Nutrition Label Analyzer
-                </h2>
-
-                <p>
-                    Paste a nutrition table from Lays,
-                    packaged food, restaurant food or any product.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="label-layout">
-
-            <div>
-
-                <label>
-                    Paste Nutrition Information
-                </label>
-
-                <textarea
-                    id="labelInput"
-                    placeholder="Example:
-
-Nutrition per 100g
-
-Energy 540 kcal
-Protein 6.5g
-Carbohydrates 53g
-Total Fat 33g
-Saturated Fat 15g
-Sugar 1.5g
-Sodium 500mg
-Fiber 4g">
-                </textarea>
-
-                <button
-                    class="primary-btn"
-                    onclick="analyzeLabel()">
-
-                    🔍 Analyze Food
-
-                </button>
-
-            </div>
-
-
-            <div
-                id="labelResult"
-                class="label-result">
-
-                <div class="empty">
-
-                    Paste a nutrition label
-                    to get a recommendation.
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- NUTRIENT DASHBOARD -->
-
-    <section
-        id="nutrientDashboard"
-        class="card hidden">
-
-        <div class="section-heading">
-
-            <div>
-
-                <span class="section-number">
-                    03
-                </span>
-
-                <h2>
-                    Nutrient Breakdown
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div
-            id="nutrientGrid"
-            class="nutrient-grid">
-
-        </div>
-
-    </section>
-
-
-
-    <!-- VITAMINS & MINERALS -->
-
-    <section
-        id="micronutrients"
-        class="card hidden">
-
-        <div class="section-heading">
-
-            <div>
-
-                <span class="section-number">
-                    04
-                </span>
-
-                <h2>
-                    Vitamins & Minerals
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div
-            id="microGrid"
-            class="micro-grid">
-
-        </div>
-
-    </section>
-
-
-
-    <!-- DAILY FITNESS VIEW -->
-
-    <section class="card">
-
-        <div class="section-heading">
-
-            <div>
-
-                <span class="section-number">
-                    05
-                </span>
-
-                <h2>
-                    Quick Fitness Guide
-                </h2>
-
-                <p>
-                    General nutrition guidance for gym users.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="tips">
-
-            <div class="tip">
-                💪
-                <strong>Protein</strong>
-                <span>
-                    Important for muscle repair and growth.
-                </span>
-            </div>
-
-            <div class="tip">
-                ⚡
-                <strong>Carbohydrates</strong>
-                <span>
-                    Main energy source for training.
-                </span>
-            </div>
-
-            <div class="tip">
-                🥑
-                <strong>Healthy Fats</strong>
-                <span>
-                    Support hormones and nutrient absorption.
-                </span>
-            </div>
-
-            <div class="tip">
-                🥦
-                <strong>Micronutrients</strong>
-                <span>
-                    Vitamins and minerals support overall health.
-                </span>
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <strong>
-        🥗 GymFood Nutrition Calculator
-    </strong>
-
-    <p>
-        Educational nutrition analysis tool.
-    </p>
-
-</footer>
-
-
-<script src="script.js"></script>
-
+	<header>
+		<nav class="nav" aria-label="Main navigation">
+			<div class="logo">FOOD<span>NUTRIENT</span></div>
+			<div class="badge">DIRECT DATABASE · PER 100 G</div>
+		</nav>
+		<div class="hero">
+			<p class="eyebrow">NUTRITION, WITHOUT THE GUESSWORK</p>
+			<h1>Know what is<br><span>on your plate.</span></h1>
+			<p>Analyze Indian, Chinese, Western foods, fruits and vegetables with calories, macros, vitamins and minerals in one clear view.</p>
+		</div>
+	</header>
+
+	<main>
+		<section class="card analyzer-card" aria-labelledby="analyzer-title">
+			<div class="section-heading">
+				<span class="section-number">01 / FOOD ANALYZER</span>
+				<h2 id="analyzer-title">Build your portion</h2>
+				<p>Choose a food, set its state and enter the amount you ate.</p>
+			</div>
+			<div class="form-grid">
+				<div class="input-group food-field">
+					<label for="foodInput">Food item</label>
+					<input id="foodInput" list="foodSuggestions" placeholder="Try rice, paneer or banana" autocomplete="off">
+					<datalist id="foodSuggestions"></datalist>
+				</div>
+				<div class="input-group">
+					<label for="lookupMode">Lookup</label>
+					<select id="lookupMode">
+						<option value="database">Curated database</option>
+						<option value="ai">AI recipe estimate</option>
+					</select>
+				</div>
+				<div class="input-group">
+					<label for="foodState">Preparation</label>
+					<select id="foodState">
+						<option value="raw">Raw / uncooked</option>
+						<option value="cooked">Cooked</option>
+					</select>
+				</div>
+				<div class="input-group">
+					<label for="foodWeight">Amount</label>
+					<input id="foodWeight" type="number" min="1" step="1" value="100" inputmode="decimal">
+				</div>
+				<div class="input-group">
+					<label for="foodUnit">Unit</label>
+					<select id="foodUnit">
+						<option value="g">grams (g)</option>
+						<option value="kg">kilograms (kg)</option>
+					</select>
+				</div>
+			</div>
+			<p class="form-note">Use AI recipe estimate for mixed dishes or regional recipes not in the curated database. AI results are estimates.</p>
+			<button class="primary-btn" type="button" onclick="calculateFood()"><span aria-hidden="true">↗</span> Analyze nutrients</button>
+			<div id="foodResult" class="result hidden" aria-live="polite"></div>
+		</section>
+
+		<section class="card" aria-labelledby="label-title">
+			<div class="section-heading">
+				<span class="section-number">02 / LABEL READER</span>
+				<h2 id="label-title">Check a nutrition label</h2>
+				<p>Paste text from a package to extract its key values and receive a simple profile.</p>
+			</div>
+			<div class="label-layout">
+				<div>
+					<label for="labelInput">Nutrition label text</label>
+					<textarea id="labelInput" placeholder="Example: Calories 240 kcal\nProtein 12 g\nCarbohydrate 30 g\nTotal Fat 8 g\nSugar 6 g\nSodium 420 mg\nFiber 5 g"></textarea>
+					<button class="primary-btn" type="button" onclick="analyzeLabel()"><span aria-hidden="true">⌕</span> Analyze label</button>
+				</div>
+				<div id="labelResult" class="label-result" aria-live="polite">
+					<div class="empty"><p>Your label breakdown will appear here.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="card insight-card" aria-labelledby="scope-title">
+			<div class="section-heading">
+				<span class="section-number">03 / HOW IT WORKS</span>
+				<h2 id="scope-title">A dependable foundation</h2>
+			</div>
+			<div class="tips">
+				<div class="tip"><strong>Verified values</strong><span>Use a curated database for consistent calculations.</span></div>
+				<div class="tip"><strong>Portion-aware</strong><span>Every result scales from a per-100 g reference.</span></div>
+				<div class="tip"><strong>Complete view</strong><span>See macros alongside vitamins and minerals.</span></div>
+				<div class="tip"><strong>AI-ready</strong><span>Add AI for food recognition, not for inventing nutrient facts.</span></div>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p>FoodNutrient is for education and meal planning, not medical diagnosis.</p>
+		<p>Values are approximate. Consult a qualified professional for clinical nutrition advice.</p>
+	</footer>
+	<script src="script.js/script.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const suggestions = document.getElementById('foodSuggestions');
+			Object.keys(foods).sort().forEach(food => {
+				const option = document.createElement('option');
+				option.value = food;
+				suggestions.appendChild(option);
+			});
+			Object.keys(foodAliases).sort().forEach(alias => {
+				const option = document.createElement('option');
+				option.value = alias;
+				suggestions.appendChild(option);
+			});
+			document.getElementById('foodInput').addEventListener('keydown', event => {
+				if (event.key === 'Enter') calculateFood();
+			});
+			document.getElementById('labelInput').addEventListener('keydown', event => {
+				if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') analyzeLabel();
+			});
+		});
+	</script>
 </body>
 </html>

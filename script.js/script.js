@@ -696,9 +696,38 @@ const foods = {
 
         }
 
+    },
+
+    "chicken biryani": {
+        raw: { calories: 165, protein: 8.5, carbs: 18.5, fat: 6.5, fiber: 1.2, vitamins: { "Vitamin B3": 2.8, "Vitamin B6": 0.2, "Vitamin B12": 0.2 }, minerals: { Iron: 1.1, Phosphorus: 105, Potassium: 145, Sodium: 310 } },
+        cooked: { calories: 190, protein: 10.5, carbs: 20.5, fat: 7.2, fiber: 1.1, vitamins: { "Vitamin B3": 3.5, "Vitamin B6": 0.25, "Vitamin B12": 0.25 }, minerals: { Iron: 1.3, Phosphorus: 125, Potassium: 165, Sodium: 350 } }
+    },
+
+    "vegetable biryani": {
+        raw: { calories: 135, protein: 3.2, carbs: 21, fat: 4.2, fiber: 2.4, vitamins: { "Vitamin A": 180, "Vitamin C": 8, "Vitamin B6": 0.15 }, minerals: { Iron: 1.1, Potassium: 150, Magnesium: 22, Sodium: 260 } },
+        cooked: { calories: 155, protein: 3.5, carbs: 24, fat: 4.8, fiber: 2.5, vitamins: { "Vitamin A": 210, "Vitamin C": 7, "Vitamin B6": 0.18 }, minerals: { Iron: 1.2, Potassium: 175, Magnesium: 25, Sodium: 290 } }
+    },
+
+    "paneer curry": {
+        raw: { calories: 185, protein: 8.5, carbs: 7.5, fat: 13.5, fiber: 1.5, vitamins: { "Vitamin A": 120, "Vitamin C": 8, "Vitamin B12": 0.5 }, minerals: { Calcium: 105, Iron: 1.2, Potassium: 180, Sodium: 330 } },
+        cooked: { calories: 210, protein: 9.5, carbs: 8.5, fat: 15.5, fiber: 1.4, vitamins: { "Vitamin A": 135, "Vitamin C": 7, "Vitamin B12": 0.55 }, minerals: { Calcium: 115, Iron: 1.3, Potassium: 195, Sodium: 370 } }
     }
 
 };
+
+const foodAliases = {
+    biryani: "chicken biryani",
+    "chicken biriyani": "chicken biryani",
+    biriyani: "chicken biryani",
+    "panner curry": "paneer curry"
+};
+
+function resolveFoodName(input) {
+    const normalized = input.trim().toLowerCase().replace(/\s+/g, " ");
+    if (foods[normalized]) return normalized;
+    if (foodAliases[normalized]) return foodAliases[normalized];
+    return Object.keys(foods).find(name => normalized.includes(name) || name.includes(normalized));
+}
 
 
 // =====================================================
@@ -707,12 +736,9 @@ const foods = {
 
 function calculateFood() {
 
-    const foodName =
-        document
-            .getElementById("foodInput")
-            .value
-            .trim()
-            .toLowerCase();
+    const enteredFood = document.getElementById("foodInput").value;
+    const foodName = resolveFoodName(enteredFood);
+    const lookupMode = document.getElementById("lookupMode").value;
 
 
     const state =
@@ -735,26 +761,6 @@ function calculateFood() {
             .value;
 
 
-    if (!foodName) {
-
-        alert("Enter a food name.");
-
-        return;
-
-    }
-
-
-    if (!foods[foodName]) {
-
-        alert(
-            "Food not available in the current database. Try carrot, rice, egg, chicken breast, oats, banana, paneer, peanuts, almonds, broccoli or spinach."
-        );
-
-        return;
-
-    }
-
-
     if (!weight || weight <= 0) {
 
         alert("Enter a valid quantity.");
@@ -771,6 +777,16 @@ function calculateFood() {
         weight =
             weight * 1000;
 
+    }
+
+    if (!foodName && lookupMode === "ai") {
+        calculateWithAI(enteredFood, weight, unit, state);
+        return;
+    }
+
+    if (!foodName) {
+        alert("Food not found. Try biryani, paneer curry, rice, chicken, fruits or vegetables, or select AI recipe estimate.");
+        return;
     }
 
 
@@ -1471,4 +1487,24 @@ function capitalize(text) {
                 letter.toUpperCase()
         );
 
+}
+
+async function calculateWithAI(food, weight, unit, state) {
+    const result = document.getElementById("foodResult");
+    result.classList.remove("hidden");
+    result.innerHTML = "<p>Asking the nutrition service for an estimate...</p>";
+
+    try {
+        const response = await fetch("/api/nutrition", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ food, weight, unit, state })
+        });
+        if (!response.ok) throw new Error("Nutrition service unavailable");
+        const data = await response.json();
+        showFoodResult(data.food || food, data.state || state, data.weight || weight, data.nutrition, data.vitamins || {}, data.minerals || {});
+        result.insertAdjacentHTML("afterbegin", "<p class=\"ai-note\">AI estimate. Verify the recipe, serving size and ingredients for accuracy.</p>");
+    } catch (error) {
+        result.innerHTML = "<p>AI lookup is not connected yet. Start a server with a POST /api/nutrition endpoint, or use the curated database.</p>";
+    }
 }
