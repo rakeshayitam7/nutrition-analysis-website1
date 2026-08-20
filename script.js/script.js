@@ -719,7 +719,13 @@ const foodAliases = {
     biryani: "chicken biryani",
     "chicken biriyani": "chicken biryani",
     biriyani: "chicken biryani",
-    "panner curry": "paneer curry"
+    "panner curry": "paneer curry",
+    eggs: "egg",
+    carrots: "carrot",
+    bananas: "banana",
+    apples: "apple",
+    potatoes: "potato",
+    broccoli: "broccoli"
 };
 
 function resolveFoodName(input) {
@@ -727,6 +733,60 @@ function resolveFoodName(input) {
     if (foods[normalized]) return normalized;
     if (foodAliases[normalized]) return foodAliases[normalized];
     return Object.keys(foods).find(name => normalized.includes(name) || name.includes(normalized));
+}
+
+const servingUnits = {
+    egg: { label: "eggs", singular: "egg", grams: 50 },
+    carrot: { label: "carrots", singular: "carrot", grams: 61 },
+    banana: { label: "bananas", singular: "banana", grams: 118 },
+    apple: { label: "apples", singular: "apple", grams: 182 },
+    potato: { label: "potatoes", singular: "potato", grams: 150 },
+    broccoli: { label: "broccoli heads", singular: "broccoli head", grams: 148 }
+};
+
+function getServingUnit(foodName) {
+    return servingUnits[foodName] || null;
+}
+
+function updateAmountControls() {
+    const foodName = resolveFoodName(document.getElementById("foodInput").value);
+    const serving = getServingUnit(foodName);
+    const amountInput = document.getElementById("foodWeight");
+    const amountLabel = document.getElementById("amountLabel");
+    const unitLabel = document.getElementById("unitLabel");
+    const unitSelect = document.getElementById("foodUnit");
+    const amountHint = document.getElementById("amountHint");
+    const previousUnit = unitSelect.value;
+    const itemLabel = serving ? serving.label : "items";
+    const itemSingular = serving ? serving.singular : "item";
+    const itemGrams = serving ? serving.grams : 100;
+    unitSelect.innerHTML = `<option value="count">${itemLabel}</option>
+        <option value="g">grams (g)</option>
+        <option value="kg">kilograms (kg)</option>
+        <option value="ml">millilitres (ml)</option>
+        <option value="l">litres (L)</option>`;
+    unitSelect.value = [...unitSelect.options].some(option => option.value === previousUnit)
+        ? previousUnit
+        : "g";
+    if (serving && previousUnit === "g" && amountInput.value === "100") {
+        unitSelect.value = "count";
+    }
+    unitSelect.disabled = false;
+    amountLabel.textContent = unitSelect.value === "count"
+        ? `How many ${itemLabel}`
+        : "Amount";
+    unitLabel.textContent = "Unit";
+    amountInput.step = unitSelect.value === "count" ? "1" : "0.1";
+
+    if (unitSelect.value === "count" && previousUnit !== "count") {
+        amountInput.value = "1";
+    } else if (unitSelect.value !== "count" && previousUnit === "count") {
+        amountInput.value = "100";
+    }
+
+    amountHint.textContent = unitSelect.value === "count"
+        ? `One ${itemSingular} is calculated as approximately ${itemGrams} g. Add a food-specific serving size for a more accurate item estimate.`
+        : "Food values are approximate. Liquid ml/L amounts are converted to the database gram basis.";
 }
 
 
@@ -770,12 +830,16 @@ function calculateFood() {
     }
 
 
-    // Convert kg to grams
+    const serving = getServingUnit(foodName);
+    const servingCount = weight;
+    const enteredUnit = unit;
 
-    if (unit === "kg") {
-
-        weight =
-            weight * 1000;
+    if (unit === "count") {
+        weight = weight * (serving ? serving.grams : 100);
+    } else if (unit === "kg" || unit === "l") {
+        weight *= 1000;
+    } else if (unit === "ml") {
+        weight *= 1;
 
     }
 
@@ -850,7 +914,10 @@ function calculateFood() {
         weight,
         nutrition,
         vitamins,
-        minerals
+        minerals,
+        unit === "count"
+            ? `${servingCount} ${servingCount === 1 ? (serving ? serving.singular : "item") : (serving ? serving.label : "items")}`
+            : `${servingCount} ${enteredUnit === "l" ? "L" : enteredUnit}`
     );
 
 }
@@ -866,7 +933,8 @@ function showFoodResult(
     weight,
     nutrition,
     vitamins,
-    minerals
+    minerals,
+    servingText = `${weight}g`
 ) {
 
     const result =
@@ -889,7 +957,7 @@ function showFoodResult(
 
         <p>
             Nutrition for
-            <strong>${weight}g</strong>
+            <strong>${servingText}</strong>
         </p>
 
         <br>
@@ -1508,3 +1576,5 @@ async function calculateWithAI(food, weight, unit, state) {
         result.innerHTML = "<p>AI lookup is not connected yet. Start a server with a POST /api/nutrition endpoint, or use the curated database.</p>";
     }
 }
+
+
