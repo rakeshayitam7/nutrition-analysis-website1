@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GymFood AI - Nutrition Calculator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+            🥗 GymFood
+        </div>
+
+        <span class="badge">
+            Nutrition Analyzer
+        </span>
+
+    </div>
+
+    <div class="hero">
+
+        <h1>
+            Know Your Food.
+            <span>Build Your Body.</span>
+        </h1>
+
+        <p>
+            Calculate protein, calories, carbs, fats,
+            vitamins and minerals for your food.
+        </p>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+    <!-- FOOD CALCULATOR -->
+
+    <section class="card">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-number">01</span>
+
+                <h2>
+                    Food Nutrition Calculator
+                </h2>
+
+                <p>
+                    Select a food and calculate its nutrition
+                    for any quantity.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="input-group">
+
+                <label>
+                    Food
+                </label>
+
+                <input
+                    type="text"
+                    id="foodInput"
+                    list="foodList"
+                    placeholder="Example: carrot, rice, egg, chicken..."
+                >
+
+                <datalist id="foodList">
+
+                    <option value="Carrot">
+                    <option value="Rice">
+                    <option value="Cooked Rice">
+                    <option value="Egg">
+                    <option value="Chicken Breast">
+                    <option value="Potato">
+                    <option value="Cooked Potato">
+                    <option value="Oats">
+                    <option value="Milk">
+                    <option value="Banana">
+                    <option value="Apple">
+                    <option value="Paneer">
+                    <option value="Dal">
+                    <option value="Peanuts">
+                    <option value="Almonds">
+                    <option value="Broccoli">
+                    <option value="Spinach">
+
+                </datalist>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Food State
+                </label>
+
+                <select id="foodState">
+
+                    <option value="raw">
+                        Raw
+                    </option>
+
+                    <option value="cooked">
+                        Cooked
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="foodWeight"
+                    value="100"
+                    min="1"
+                    placeholder="100"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Unit
+                </label>
+
+                <select id="foodUnit">
+
+                    <option value="g">
+                        Grams (g)
+                    </option>
+
+                    <option value="kg">
+                        Kilograms (kg)
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="calculateFood()">
+
+            Calculate Nutrition
+
+        </button>
+
+
+        <div
+            id="foodResult"
+            class="result hidden">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- LABEL ANALYZER -->
+
+    <section class="card">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-number">
+                    02
+                </span>
+
+                <h2>
+                    Nutrition Label Analyzer
+                </h2>
+
+                <p>
+                    Paste a nutrition table from Lays,
+                    packaged food, restaurant food or any product.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="label-layout">
+
+            <div>
+
+                <label>
+                    Paste Nutrition Information
+                </label>
+
+                <textarea
+                    id="labelInput"
+                    placeholder="Example:
+
+Nutrition per 100g
+
+Energy 540 kcal
+Protein 6.5g
+Carbohydrates 53g
+Total Fat 33g
+Saturated Fat 15g
+Sugar 1.5g
+Sodium 500mg
+Fiber 4g">
+                </textarea>
+
+                <button
+                    class="primary-btn"
+                    onclick="analyzeLabel()">
+
+                    🔍 Analyze Food
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="labelResult"
+                class="label-result">
+
+                <div class="empty">
+
+                    Paste a nutrition label
+                    to get a recommendation.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- NUTRIENT DASHBOARD -->
+
+    <section
+        id="nutrientDashboard"
+        class="card hidden">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-number">
+                    03
+                </span>
+
+                <h2>
+                    Nutrient Breakdown
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="nutrientGrid"
+            class="nutrient-grid">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- VITAMINS & MINERALS -->
+
+    <section
+        id="micronutrients"
+        class="card hidden">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-number">
+                    04
+                </span>
+
+                <h2>
+                    Vitamins & Minerals
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="microGrid"
+            class="micro-grid">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- DAILY FITNESS VIEW -->
+
+    <section class="card">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-number">
+                    05
+                </span>
+
+                <h2>
+                    Quick Fitness Guide
+                </h2>
+
+                <p>
+                    General nutrition guidance for gym users.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tips">
+
+            <div class="tip">
+                💪
+                <strong>Protein</strong>
+                <span>
+                    Important for muscle repair and growth.
+                </span>
+            </div>
+
+            <div class="tip">
+                ⚡
+                <strong>Carbohydrates</strong>
+                <span>
+                    Main energy source for training.
+                </span>
+            </div>
+
+            <div class="tip">
+                🥑
+                <strong>Healthy Fats</strong>
+                <span>
+                    Support hormones and nutrient absorption.
+                </span>
+            </div>
+
+            <div class="tip">
+                🥦
+                <strong>Micronutrients</strong>
+                <span>
+                    Vitamins and minerals support overall health.
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <strong>
+        🥗 GymFood Nutrition Calculator
+    </strong>
+
+    <p>
+        Educational nutrition analysis tool.
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,786 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0fdf4,
+            #f8fafc
+        );
+
+    color: #172033;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #052e16,
+            #166534
+        );
+
+    color: white;
+
+    padding: 28px 7% 70px;
+
+}
+
+
+.nav {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.logo {
+
+    font-size: 23px;
+
+    font-weight: 800;
+}
+
+
+.badge {
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.2);
+
+    font-size: 12px;
+}
+
+
+.hero {
+
+    max-width: 900px;
+
+    margin: 60px auto 0;
+
+    text-align: center;
+}
+
+
+.hero h1 {
+
+    font-size:
+        clamp(
+            38px,
+            6vw,
+            68px
+        );
+
+    line-height: 1.05;
+
+    margin-bottom: 20px;
+}
+
+
+.hero h1 span {
+
+    display: block;
+
+    color: #86efac;
+}
+
+
+.hero p {
+
+    color: #d1fae5;
+
+    max-width: 650px;
+
+    margin: auto;
+
+    font-size: 16px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+
+    width: 92%;
+
+    max-width: 1200px;
+
+    margin:
+        -35px auto
+        40px;
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+
+    background: white;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    border-radius: 20px;
+
+    border:
+        1px solid
+        #e5e7eb;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.07);
+}
+
+
+.section-heading {
+
+    margin-bottom: 25px;
+}
+
+
+.section-number {
+
+    color: #16a34a;
+
+    font-weight: 800;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+
+.section-heading h2 {
+
+    font-size: 25px;
+
+    margin-top: 4px;
+}
+
+
+.section-heading p {
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    margin-top: 5px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr 1fr;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+.input-group label,
+label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #374151;
+
+    margin-bottom: 7px;
+}
+
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    border:
+        1px solid
+        #d1d5db;
+
+    border-radius: 10px;
+
+    padding: 13px;
+
+    background: #f9fafb;
+
+    color: #111827;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    border-color: #16a34a;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(22,163,74,0.1);
+
+    background: white;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.primary-btn {
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #15803d
+        );
+
+    color: white;
+
+    border: none;
+
+    padding: 13px 22px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.primary-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(22,163,74,0.25);
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    background:
+        #f0fdf4;
+
+    border:
+        1px solid
+        #bbf7d0;
+
+    border-radius: 14px;
+}
+
+
+.result h3 {
+
+    margin-bottom: 5px;
+}
+
+
+.hidden {
+
+    display: none;
+}
+
+
+/* =========================
+   LABEL ANALYZER
+========================= */
+
+.label-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 25px;
+}
+
+
+textarea {
+
+    min-height: 240px;
+
+    resize: vertical;
+
+    font-family:
+        Consolas,
+        monospace;
+
+    margin-bottom: 12px;
+}
+
+
+.label-result {
+
+    min-height: 240px;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    background:
+        #f8fafc;
+
+    border:
+        1px solid
+        #e5e7eb;
+}
+
+
+.empty {
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color: #94a3b8;
+}
+
+
+/* =========================
+   RECOMMENDATION
+========================= */
+
+.recommendation {
+
+    text-align: center;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    margin-bottom: 15px;
+}
+
+
+.recommendation h3 {
+
+    font-size: 30px;
+
+    margin-bottom: 5px;
+}
+
+
+.good {
+
+    background:
+        #dcfce7;
+
+    color:
+        #166534;
+}
+
+
+.okay {
+
+    background:
+        #fef9c3;
+
+    color:
+        #854d0e;
+}
+
+
+.bad {
+
+    background:
+        #ffedd5;
+
+    color:
+        #9a3412;
+}
+
+
+.worst {
+
+    background:
+        #fee2e2;
+
+    color:
+        #991b1b;
+}
+
+
+.label-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+
+.label-stat {
+
+    padding: 12px;
+
+    background: white;
+
+    border-radius: 9px;
+
+    border:
+        1px solid
+        #e5e7eb;
+}
+
+
+.label-stat span {
+
+    display: block;
+
+    font-size: 11px;
+
+    color: #64748b;
+}
+
+
+.label-stat strong {
+
+    font-size: 16px;
+}
+
+
+/* =========================
+   NUTRIENTS
+========================= */
+
+.nutrient-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.nutrient {
+
+    padding: 20px;
+
+    background:
+        #f8fafc;
+
+    border-radius: 13px;
+
+    border:
+        1px solid
+        #e5e7eb;
+}
+
+
+.nutrient-icon {
+
+    font-size: 24px;
+
+    margin-bottom: 8px;
+}
+
+
+.nutrient span {
+
+    display: block;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+.nutrient strong {
+
+    font-size: 22px;
+
+    display: block;
+
+    margin-top: 3px;
+}
+
+
+/* =========================
+   MICRONUTRIENTS
+========================= */
+
+.micro-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+
+.micro {
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background:
+        #f8fafc;
+
+    border:
+        1px solid
+        #e5e7eb;
+
+    display: flex;
+
+    justify-content: space-between;
+}
+
+
+/* =========================
+   TIPS
+========================= */
+
+.tips {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.tip {
+
+    padding: 20px;
+
+    border-radius: 13px;
+
+    background:
+        #f0fdf4;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.tip:first-letter {
+
+    font-size: 25px;
+}
+
+
+.tip strong {
+
+    font-size: 15px;
+}
+
+
+.tip span {
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+footer p {
+
+    margin-top: 4px;
+
+    font-size: 11px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+
+    .form-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .nutrient-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .tips {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    header {
+
+        padding:
+            22px 5% 60px;
+    }
+
+
+    .hero {
+
+        margin-top: 45px;
+    }
+
+
+    .hero h1 {
+
+        font-size: 40px;
+    }
+
+
+    main {
+
+        width: 94%;
+    }
+
+
+    .card {
+
+        padding: 20px;
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .label-layout {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .nutrient-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .micro-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .tips {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .label-stats {
+
+        grid-template-columns: 1fr;
+    }
+
+}
