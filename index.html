@@ -39,8 +39,9 @@
 				<div class="input-group">
 					<label for="lookupMode">Lookup</label>
 					<select id="lookupMode">
-						<option value="database">Curated database</option>
-						<option value="ai">AI recipe estimate</option>
+                        <option value="usda" selected>USDA FoodData Central (standard)</option>
+                        <option value="database">Curated database (approximate)</option>
+                        <option value="ai">AI-assisted USDA lookup</option>
 					</select>
 				</div>
 				<div class="input-group">
@@ -70,7 +71,7 @@
 					</select>
 				</div>
 			</div>
-			<p class="form-note" id="amountHint">Food values are approximate. Choose a serving unit when available; mixed dishes are calculated per 100 g.</p>
+            <p class="form-note" id="amountHint">USDA reference values are used by default. Choose a serving unit when available; mixed dishes depend on the recipe.</p>
 			<button class="primary-btn" type="button" onclick="calculateFood()"><span aria-hidden="true">↗</span> Analyze nutrients</button>
 			<div id="foodResult" class="result hidden" aria-live="polite"></div>
 		</section>
@@ -99,7 +100,7 @@
 				<h2 id="scope-title">A dependable foundation</h2>
 			</div>
 			<div class="tips">
-				<div class="tip"><strong>Verified values</strong><span>Use a curated database for consistent calculations.</span></div>
+                <div class="tip"><strong>USDA standard</strong><span>Use FoodData Central reference records for the selected food and preparation.</span></div>
 				<div class="tip"><strong>Portion-aware</strong><span>Every result scales from a per-100 g reference.</span></div>
 				<div class="tip"><strong>Complete view</strong><span>See macros alongside vitamins and minerals.</span></div>
 				<div class="tip"><strong>AI-ready</strong><span>Add AI for food recognition, not for inventing nutrient facts.</span></div>
@@ -111,6 +112,13 @@
 		<p>FoodNutrient is for education and meal planning, not medical diagnosis.</p>
 		<p>Values are approximate. Consult a qualified professional for clinical nutrition advice.</p>
 	</footer>
+    <footer style="text-align: center; padding: 20px; margin-top: 30px; background: #111; color: white; font-size: 15px;">
+        <div>Created by <strong>Rakesh Kumar</strong></div>
+        <div style="margin-top: 8px;">
+            <span aria-hidden="true">&#128222;</span>
+            <a href="tel:+919963755421" style="color: white; text-decoration: none;">+91 99637 55421</a>
+        </div>
+    </footer>
 	<script src="script.js/script.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
@@ -584,5 +592,4 @@ document
 </script>
 
 <!-- ================= END DONATION ================= -->
-</script>
 </html>

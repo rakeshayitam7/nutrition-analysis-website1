@@ -1,0 +1,6 @@
+[build]
+  publish = "."
+  functions = "script.js/netlify.toml/netlify"
+
+[functions]
+  node_bundler = "esbuild"
